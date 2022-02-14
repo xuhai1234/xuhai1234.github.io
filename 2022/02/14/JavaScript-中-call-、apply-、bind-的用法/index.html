@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="要么不做，要么认真做," />
 
 
 
@@ -79,14 +79,17 @@
 
 
 
-<meta name="description" content="为什么不是我呢">
-<meta property="og:type" content="website">
-<meta property="og:title" content="徐海的博客">
-<meta property="og:url" content="https://xuhai97.github.io/index.html">
+<meta name="description" content="JavaScript 中 call()、apply()、bind() 的用法分类 编程技术其实是一个很简单的东西，认真看十分钟就从一脸懵 B 到完全 理解！ Quick Start例 1123456789101112var name &#x3D; &quot;小王&quot;,age&#x3D;18;var obj &#x3D;&amp;#123;  name:&quot;小张&quot;,  objAge:this.age,  my">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 中 call()、apply()、bind() 的用法">
+<meta property="og:url" content="https://xuhai97.github.io/2022/02/14/JavaScript-%E4%B8%AD-call-%E3%80%81apply-%E3%80%81bind-%E7%9A%84%E7%94%A8%E6%B3%95/index.html">
 <meta property="og:site_name" content="徐海的博客">
-<meta property="og:description" content="为什么不是我呢">
+<meta property="og:description" content="JavaScript 中 call()、apply()、bind() 的用法分类 编程技术其实是一个很简单的东西，认真看十分钟就从一脸懵 B 到完全 理解！ Quick Start例 1123456789101112var name &#x3D; &quot;小王&quot;,age&#x3D;18;var obj &#x3D;&amp;#123;  name:&quot;小张&quot;,  objAge:this.age,  my">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-14T07:54:56.000Z">
+<meta property="article:modified_time" content="2022-02-14T08:19:07.315Z">
 <meta property="article:author" content="徐海">
+<meta property="article:tag" content="要么不做，要么认真做">
 <meta name="twitter:card" content="summary">
 
 
@@ -117,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://xuhai97.github.io/"/>
+  <link rel="canonical" href="https://xuhai97.github.io/2022/02/14/JavaScript-中-call-、apply-、bind-的用法/"/>
 
 
 
 
 
-  <title>徐海的博客</title>
+  <title>JavaScript 中 call()、apply()、bind() 的用法 | 徐海的博客</title>
   
 
 
@@ -142,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -216,9 +218,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -248,9 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/02/14/JavaScript-%E4%B8%AD-call-%E3%80%81apply-%E3%80%81bind-%E7%9A%84%E7%94%A8%E6%B3%95/" itemprop="url">JavaScript 中 call()、apply()、bind() 的用法</a></h1>
+          <h1 class="post-title" itemprop="name headline">JavaScript 中 call()、apply()、bind() 的用法</h1>
         
 
         <div class="post-meta">
@@ -300,9 +300,7 @@
       
 
       
-        
-          
-            <p>JavaScript 中 call()、apply()、bind() 的用法<br>分类 编程技术<br>其实是一个很简单的东西，认真看十分钟就从一脸懵 B 到完全 理解！</p>
+        <p>JavaScript 中 call()、apply()、bind() 的用法<br>分类 编程技术<br>其实是一个很简单的东西，认真看十分钟就从一脸懵 B 到完全 理解！</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="例-1"><a href="#例-1" class="headerlink" title="例 1"></a>例 1</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var name = <span class="string">&quot;小王&quot;</span>,age=18;</span><br><span class="line">var obj =&#123;</span><br><span class="line">  name:<span class="string">&quot;小张&quot;</span>,</span><br><span class="line">  objAge:this.age,</span><br><span class="line">  myFun:<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    console.log(this.name+<span class="string">&quot;年龄&quot;</span>+this.age);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//执行结果</span><br><span class="line">obj.objAge;  // 17</span><br><span class="line">obj.myFun()  // 小张年龄 undefined</span><br></pre></td></tr></table></figure>
 
 <h3 id="例-2"><a href="#例-2" class="headerlink" title="例 2"></a>例 2</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var name = <span class="string">&quot;小王&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">getName</span></span>()&#123;</span><br><span class="line">  console.log(this.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//执行结果</span><br><span class="line">getName();  // 小王</span><br></pre></td></tr></table></figure>
@@ -315,8 +313,6 @@
 
 <p>微妙的差距！<br>从上面四个结果不难看出:<br>call 、bind 、 apply 这三个函数的第一个参数都是 this 的指向对象，第二个参数差别就来了：<br>call 的参数是直接放进去的，第二第三第 n 个参数全都用逗号分隔，直接放到后面 obj.myFun.call(db,’成都’, … ,’string’ )。<br>apply 的所有参数都必须放在一个数组里面传进去 obj.myFun.apply(db,[‘成都’, …, ‘string’ ])。<br>bind 除了返回是函数以外，它 的参数和 call 一样。<br>当然，三者的参数不限定是 string 类型，允许是各种类型，包括函数 、 object 等等！</p>
 
-          
-        
       
     </div>
     
@@ -331,146 +327,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xuhai97.github.io/2022/02/14/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="徐海的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/02/14/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-02-14T11:03:51+08:00">
-                2022-02-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/%E8%A6%81%E4%B9%88%E4%B8%8D%E5%81%9A%EF%BC%8C%E8%A6%81%E4%B9%88%E8%AE%A4%E7%9C%9F%E5%81%9A/" rel="tag"># 要么不做，要么认真做</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/02/14/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -480,10 +366,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -491,6 +378,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -511,8 +402,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -563,6 +463,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B-1"><span class="nav-number">1.1.</span> <span class="nav-text">例 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B-2"><span class="nav-number">1.2.</span> <span class="nav-text">例 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%8Ccall-%E3%80%81apply-%E3%80%81bind-%E9%83%BD%E6%98%AF%E7%94%A8%E6%9D%A5%E9%87%8D%E5%AE%9A%E4%B9%89-this-%E8%BF%99%E4%B8%AA%E5%AF%B9%E8%B1%A1%E7%9A%84%EF%BC%81"><span class="nav-number">1.3.</span> <span class="nav-text">1，call()、apply()、bind() 都是用来重定义 this 这个对象的！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AF%B9%E6%AF%94-call-%E3%80%81bind-%E3%80%81-apply-%E4%BC%A0%E5%8F%82%E6%83%85%E5%86%B5%E4%B8%8B"><span class="nav-number">1.4.</span> <span class="nav-text">2,对比 call 、bind 、 apply 传参情况下</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -696,6 +612,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
